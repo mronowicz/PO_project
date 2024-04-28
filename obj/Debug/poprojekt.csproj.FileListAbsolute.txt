@@ -1,0 +1,7 @@
+D:\programowanie\csharp\poprojekt\bin\Debug\poprojekt.exe.config
+D:\programowanie\csharp\poprojekt\bin\Debug\poprojekt.exe
+D:\programowanie\csharp\poprojekt\bin\Debug\poprojekt.pdb
+D:\programowanie\csharp\poprojekt\obj\Debug\poprojekt.csproj.AssemblyReference.cache
+D:\programowanie\csharp\poprojekt\obj\Debug\poprojekt.csproj.CoreCompileInputs.cache
+D:\programowanie\csharp\poprojekt\obj\Debug\poprojekt.exe
+D:\programowanie\csharp\poprojekt\obj\Debug\poprojekt.pdb
