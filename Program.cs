@@ -42,11 +42,11 @@ class Program
     static void PokazKlientow()
     {
         Console.Clear();
-        Console.WriteLine("Contacts:");
+        Console.WriteLine("lista klientow:");
 
         if (klienci.Count == 0)
         {
-            Console.WriteLine("No contacts found.");
+            Console.WriteLine("nic tu nie ma");
         }
         else
         {
