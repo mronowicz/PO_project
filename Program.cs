@@ -11,7 +11,7 @@ class Program
         while (!exit)
         {
             Console.Clear();
-            Console.WriteLine("Address Book");
+            Console.WriteLine("mechanik");
             Console.WriteLine("1. Pokaz klientow");
             Console.WriteLine("2. Dodaj klienta");
             Console.WriteLine("3. Edytuj klienta");
@@ -57,38 +57,38 @@ class Program
         }
 
         Console.WriteLine();
-        Console.WriteLine("Press any key to continue...");
+        Console.WriteLine("kliknij cos");
         Console.ReadKey();
     }
 
     static void DodajKlienta()
     {
         Console.Clear();
-        Console.WriteLine("Add Contact");
+        Console.WriteLine("dodaj klienta");
 
-        Console.Write("Name: ");
+        Console.Write("imie: ");
         string imie = Console.ReadLine();
 
-        Console.Write("Email: ");
+        Console.Write("mail: ");
         string email = Console.ReadLine();
 
         klienci.Add(new Klient(imie, email));
 
-        Console.WriteLine("Contact added successfully!");
+        Console.WriteLine("dodano");
         Console.WriteLine();
-        Console.WriteLine("Press any key to continue...");
+        Console.WriteLine("kliknij cos");
         Console.ReadKey();
     }
 
     static void EdytujKlienta()
     {
         Console.Clear();
-        Console.WriteLine("Edit Contact");
+        Console.WriteLine("zmien dane klienta");
 
-        Console.Write("Enter contact number to edit: ");
+        Console.Write("numer klienta do edycji ");
         int index = int.Parse(Console.ReadLine()) - 1;
 
-        Console.Write("Name: ");
+        Console.Write("imie: ");
         string name = Console.ReadLine();
 
         Console.Write("Email: ");
@@ -98,23 +98,23 @@ class Program
 
         Console.WriteLine("Contact edited successfully!");
         Console.WriteLine();
-        Console.WriteLine("Press any key to continue...");
+        Console.WriteLine("kliknij cos");
         Console.ReadKey();
     }
 
     static void UsunKlienta()
     {
         Console.Clear();
-        Console.WriteLine("Delete Contact");
+        Console.WriteLine("usun klienta);
 
-        Console.Write("Enter contact number to delete: ");
+        Console.Write("numer klienta do usuniecia");
         int index = int.Parse(Console.ReadLine()) - 1;
 
         klienci.RemoveAt(index);
 
-        Console.WriteLine("Contact deleted successfully!");
+        Console.WriteLine("usunieto");
         Console.WriteLine();
-        Console.WriteLine("Press any key to continue...");
+        Console.WriteLine("kliknij cos");
         Console.ReadKey();
     }
 }
