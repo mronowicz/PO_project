@@ -5,3 +5,10 @@ D:\programowanie\csharp\poprojekt\obj\Debug\poprojekt.csproj.AssemblyReference.c
 D:\programowanie\csharp\poprojekt\obj\Debug\poprojekt.csproj.CoreCompileInputs.cache
 D:\programowanie\csharp\poprojekt\obj\Debug\poprojekt.exe
 D:\programowanie\csharp\poprojekt\obj\Debug\poprojekt.pdb
+C:\Users\Marcin\Source\Repos\PO_project\bin\Debug\poprojekt.exe.config
+C:\Users\Marcin\Source\Repos\PO_project\bin\Debug\poprojekt.exe
+C:\Users\Marcin\Source\Repos\PO_project\bin\Debug\poprojekt.pdb
+C:\Users\Marcin\Source\Repos\PO_project\obj\Debug\poprojekt.csproj.AssemblyReference.cache
+C:\Users\Marcin\Source\Repos\PO_project\obj\Debug\poprojekt.csproj.CoreCompileInputs.cache
+C:\Users\Marcin\Source\Repos\PO_project\obj\Debug\poprojekt.exe
+C:\Users\Marcin\Source\Repos\PO_project\obj\Debug\poprojekt.pdb

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class Program
 {
@@ -7,8 +8,8 @@ class Program
 
     static void Main()
     {
-        bool exit = false;
-        while (!exit)
+        string choice;
+        do
         {
             Console.Clear();
             Console.WriteLine("mechanik");
@@ -18,7 +19,8 @@ class Program
             Console.WriteLine("4. Usun klienta");
             Console.WriteLine("5. Wyjdz");
 
-            switch (Console.ReadLine())
+            choice = Console.ReadLine();
+            switch (choice)
             {
                 case "1":
                     PokazKlientow();
@@ -32,11 +34,8 @@ class Program
                 case "4":
                     UsunKlienta();
                     break;
-                case "5":
-                    exit = true;
-                    break;
             }
-        }
+        } while (choice != "5");
     }
 
     static void PokazKlientow()
@@ -44,20 +43,18 @@ class Program
         Console.Clear();
         Console.WriteLine("lista klientow:");
 
-        if (klienci.Count == 0)
+        if (!klienci.Any())
         {
             Console.WriteLine("nic tu nie ma");
         }
         else
         {
-            for (int i = 0; i < klienci.Count; i++)
+            foreach (var (klient, index) in klienci.Select((value, i) => (value, i)))
             {
-                Console.WriteLine("{0}. {1} ({2})", i + 1, klienci[i].Name, klienci[i].Email);
+                Console.WriteLine($"{index + 1}. {klient.Imie} ({klient.Email}, {klient.Telefon})");
             }
         }
 
-        Console.WriteLine();
-        Console.WriteLine("kliknij cos");
         Console.ReadKey();
     }
 
@@ -66,67 +63,79 @@ class Program
         Console.Clear();
         Console.WriteLine("dodaj klienta");
 
-        Console.Write("imie: ");
-        string imie = Console.ReadLine();
+        var imie = Prompt("imie: ");
+        var email = Prompt("mail: ");
+        var telefon = Prompt("telefon: ");
+        var samochod = Prompt("Samochod: ")
 
-        Console.Write("mail: ");
-        string email = Console.ReadLine();
+        klienci.Add(new Klient(imie, email, telefon));
 
-        klienci.Add(new Klient(imie, email));
-
-        Console.WriteLine("dodano");
-        Console.WriteLine();
-        Console.WriteLine("kliknij cos");
+        Console.WriteLine("dodano\n");
         Console.ReadKey();
     }
 
     static void EdytujKlienta()
     {
-        Console.Clear();
-        Console.WriteLine("zmien dane klienta");
+        PokazKlientow();
 
-        Console.Write("numer klienta do edycji ");
-        int index = int.Parse(Console.ReadLine()) - 1;
+        var index = GetClientIndex();
 
-        Console.Write("imie: ");
-        string name = Console.ReadLine();
+        var imie = Prompt("imie: ");
+        var email = Prompt("Email: ");
+        var telefon = Prompt("telefon: ");
 
-        Console.Write("Email: ");
-        string email = Console.ReadLine();
+        klienci[index] = new Klient(imie, email, telefon);
 
-        klienci[index] = new Klient(name, email);
-
-        Console.WriteLine("Contact edited successfully!");
-        Console.WriteLine();
-        Console.WriteLine("kliknij cos");
+        Console.WriteLine("Contact edited successfully!\n");
         Console.ReadKey();
     }
 
     static void UsunKlienta()
     {
-        Console.Clear();
-        Console.WriteLine("usun klienta);
+        PokazKlientow();
 
-        Console.Write("numer klienta do usuniecia");
-        int index = int.Parse(Console.ReadLine()) - 1;
+        var index = GetClientIndex();
 
         klienci.RemoveAt(index);
 
-        Console.WriteLine("usunieto");
-        Console.WriteLine();
-        Console.WriteLine("kliknij cos");
+        Console.WriteLine("usunieto\n");
         Console.ReadKey();
+    }
+
+    static string Prompt(string message)
+    {
+        Console.Write(message);
+        return Console.ReadLine();
+    }
+
+    static int GetClientIndex()
+    {
+        int index;
+
+        do
+        {
+            Console.Write("numer klienta: ");
+
+            if (!int.TryParse(Console.ReadLine(), out index) || index < 1 || index > klienci.Count)
+                Console.WriteLine("Invalid number. Try again.");
+
+        } while (index < 1 || index > klienci.Count);
+
+        return index - 1;
     }
 }
 
 class Klient
 {
-    public string Name { get; set; }
+    public string Imie { get; set; }
     public string Email { get; set; }
+    public string Telefon { get; set; }
+    public string Samochod { get; set; }
 
-    public Klient(string name, string email)
+    public Klient(string imie, string email, string telefon)
     {
-        Name = name;
+        Imie = imie;
         Email = email;
+        Telefon = telefon;
     }
 }
