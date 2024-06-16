@@ -102,7 +102,7 @@ class Program
 
         klienci[index] = new Klient(imie, email, telefon, samochod);
 
-        Console.WriteLine("Contact edited successfully!\n");
+        Console.WriteLine("klient zaktualizowany \n");
         Console.ReadKey();
     }
 
@@ -150,7 +150,7 @@ class Program
             Console.Write("numer klienta: ");
 
             if (!int.TryParse(Console.ReadLine(), out index) || index < 1 || index > klienci.Count)
-                Console.WriteLine("Invalid number. Try again.");
+                Console.WriteLine("zły numer, podaj numer z listy");
 
         } while (index < 1 || index > klienci.Count);
 
