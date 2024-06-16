@@ -71,7 +71,7 @@ class Program
         Console.WriteLine("dodaj samochod klienta");
         var marka = Prompt("marka: ");
         var model = Prompt("model: ");
-        var rokProdukcji = int.Parse(Prompt("rok produkcji: "));
+        var rokProdukcji = PromptForYear("rok produkcji: ");
         var numerRejestracyjny = Prompt("numer rejestracyjny: ");
 
         var samochod = new Samochod(marka, model, rokProdukcji, numerRejestracyjny);
@@ -122,6 +122,23 @@ class Program
     {
         Console.Write(message);
         return Console.ReadLine();
+    }
+
+    static int PromptForYear(string message)
+    {
+        int year;
+        string input;
+        do
+        {
+            Console.Write(message);
+            input = Console.ReadLine();
+            if (!int.TryParse(input, out year) || input.Length != 4 || year < 1986 || year > 2024)
+            {
+                Console.WriteLine("Wprowadź prawidłowy rok produkcji");
+            }
+        } while (!int.TryParse(input, out year) || input.Length != 4 || year < 1986 || year > 2024);
+
+        return year;
     }
 
     static int GetClientIndex()
