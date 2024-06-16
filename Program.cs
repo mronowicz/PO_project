@@ -51,7 +51,8 @@ class Program
         {
             foreach (var (klient, index) in klienci.Select((value, i) => (value, i)))
             {
-                Console.WriteLine($"{index + 1}. {klient.Imie} ({klient.Email}, {klient.Telefon})");
+                var samochod = klient.Samochod;
+                Console.WriteLine($"{index + 1}. {klient.Imie} ({klient.Email}, {klient.Telefon}) - Samochod: {samochod.Marka} {samochod.Model} ({samochod.NumerRejestracyjny})");
             }
         }
 
@@ -66,9 +67,15 @@ class Program
         var imie = Prompt("imie: ");
         var email = Prompt("mail: ");
         var telefon = Prompt("telefon: ");
-        var samochod = Prompt("Samochod: ")
 
-        klienci.Add(new Klient(imie, email, telefon));
+        Console.WriteLine("dodaj samochod klienta");
+        var marka = Prompt("marka: ");
+        var model = Prompt("model: ");
+        var numerRejestracyjny = Prompt("numer rejestracyjny: ");
+
+        var samochod = new Samochod(marka, model, numerRejestracyjny);
+
+        klienci.Add(new Klient(imie, email, telefon, samochod));
 
         Console.WriteLine("dodano\n");
         Console.ReadKey();
@@ -84,7 +91,14 @@ class Program
         var email = Prompt("Email: ");
         var telefon = Prompt("telefon: ");
 
-        klienci[index] = new Klient(imie, email, telefon);
+        Console.WriteLine("edytuj samochod klienta");
+        var marka = Prompt("marka: ");
+        var model = Prompt("model: ");
+        var numerRejestracyjny = Prompt("numer rejestracyjny: ");
+
+        var samochod = new Samochod(marka, model, numerRejestracyjny);
+
+        klienci[index] = new Klient(imie, email, telefon, samochod);
 
         Console.WriteLine("Contact edited successfully!\n");
         Console.ReadKey();
@@ -130,12 +144,27 @@ class Klient
     public string Imie { get; set; }
     public string Email { get; set; }
     public string Telefon { get; set; }
-    public string Samochod { get; set; }
+    public Samochod Samochod { get; set; }
 
-    public Klient(string imie, string email, string telefon)
+    public Klient(string imie, string email, string telefon, Samochod samochod)
     {
         Imie = imie;
         Email = email;
         Telefon = telefon;
+        Samochod = samochod;
+    }
+}
+
+class Samochod
+{
+    public string Marka { get; set; }
+    public string Model { get; set; }
+    public string NumerRejestracyjny { get; set; }
+
+    public Samochod(string marka, string model, string numerRejestracyjny)
+    {
+        Marka = marka;
+        Model = model;
+        NumerRejestracyjny = numerRejestracyjny;
     }
 }
