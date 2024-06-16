@@ -52,7 +52,7 @@ class Program
             foreach (var (klient, index) in klienci.Select((value, i) => (value, i)))
             {
                 var samochod = klient.Samochod;
-                Console.WriteLine($"{index + 1}. {klient.Imie} ({klient.Email}, {klient.Telefon}) - Samochod: {samochod.Marka} {samochod.Model} ({samochod.NumerRejestracyjny})");
+                Console.WriteLine($"{index + 1}. {klient.Imie} ({klient.Email}, {klient.Telefon}) - Samochod: {samochod.Marka} {samochod.Model} ({samochod.RokProdukcji}), {samochod.NumerRejestracyjny}");
             }
         }
 
@@ -71,9 +71,10 @@ class Program
         Console.WriteLine("dodaj samochod klienta");
         var marka = Prompt("marka: ");
         var model = Prompt("model: ");
+        var rokProdukcji = int.Parse(Prompt("rok produkcji: "));
         var numerRejestracyjny = Prompt("numer rejestracyjny: ");
 
-        var samochod = new Samochod(marka, model, numerRejestracyjny);
+        var samochod = new Samochod(marka, model, rokProdukcji, numerRejestracyjny);
 
         klienci.Add(new Klient(imie, email, telefon, samochod));
 
@@ -94,9 +95,10 @@ class Program
         Console.WriteLine("edytuj samochod klienta");
         var marka = Prompt("marka: ");
         var model = Prompt("model: ");
+        var rokProdukcji = int.Parse(Prompt("rok produkcji: "));
         var numerRejestracyjny = Prompt("numer rejestracyjny: ");
 
-        var samochod = new Samochod(marka, model, numerRejestracyjny);
+        var samochod = new Samochod(marka, model, rokProdukcji, numerRejestracyjny);
 
         klienci[index] = new Klient(imie, email, telefon, samochod);
 
@@ -159,12 +161,14 @@ class Samochod
 {
     public string Marka { get; set; }
     public string Model { get; set; }
+    public int RokProdukcji { get; set; }
     public string NumerRejestracyjny { get; set; }
 
-    public Samochod(string marka, string model, string numerRejestracyjny)
+    public Samochod(string marka, string model, int rokProdukcji, string numerRejestracyjny)
     {
         Marka = marka;
         Model = model;
+        RokProdukcji = rokProdukcji;
         NumerRejestracyjny = numerRejestracyjny;
     }
 }
