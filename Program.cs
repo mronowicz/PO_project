@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
 class Program
 {
     static List<Klient> klienci = new List<Klient>();
 
+
     static void Main()
     {
-        string choice;
+        string menu;
         do
         {
             Console.Clear();
@@ -17,10 +19,12 @@ class Program
             Console.WriteLine("2. Dodaj klienta");
             Console.WriteLine("3. Edytuj klienta");
             Console.WriteLine("4. Usun klienta");
-            Console.WriteLine("5. Wyjdz");
+            Console.WriteLine("5. Garaz");
+            Console.WriteLine("6. Wyjdz");
+            
 
-            choice = Console.ReadLine();
-            switch (choice)
+            menu = Console.ReadLine();
+            switch (menu)
             {
                 case "1":
                     PokazKlientow();
@@ -34,8 +38,12 @@ class Program
                 case "4":
                     UsunKlienta();
                     break;
+                case "5":
+                    Garaz();
+                    break;
+
             }
-        } while (choice != "5");
+        } while (menu != "6");
     }
 
     static void PokazKlientow()
@@ -66,36 +74,102 @@ class Program
 
         var imie = Prompt("imie: ");
         var email = Prompt("mail: ");
+        while (!sprawdzEmail(email))
+        {
+            Console.WriteLine("Nieprawidłowy adres e-mail. Spróbuj ponownie.");
+            email = Prompt("mail: ");
+        }
         var telefon = Prompt("telefon: ");
+        while (!sprawdzNumerTelefonu(telefon))
+        {
+            Console.WriteLine("Nieprawidłowy numer telefonu. Numer telefonu powinien składać się wyłącznie z cyfr i mieścić się w zakresie od 7 do 14 znaków. Spróbuj ponownie.");
+            telefon = Prompt("telefon: ");
+        }
 
         Console.WriteLine("dodaj samochod klienta");
         var marka = Prompt("marka: ");
         var model = Prompt("model: ");
-        var rokProdukcji = PromptForYear("rok produkcji: ");
+        var rokProdukcji = WyswietlRok("rok produkcji: ");
         var numerRejestracyjny = Prompt("numer rejestracyjny: ");
 
         var samochod = new Samochod(marka, model, rokProdukcji, numerRejestracyjny);
 
         klienci.Add(new Klient(imie, email, telefon, samochod));
 
-        Console.WriteLine("dodano\n");
+        Console.WriteLine("dodano, nacisnij enter aby wrócic do menu\n");
         Console.ReadKey();
     }
+    static bool sprawdzEmail(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+        {
+            return false;
+        }
+
+        if (!email.Contains("@"))
+        {
+            return false;
+        }
+
+        string[] dozwoloneDomeny = { "gmail.com", "interia.pl", "wp.pl", "onet.pl", "o2.pl", "gazeta.pl" };
+
+        string domena = email.Split('@')[1];
+        if (!dozwoloneDomeny.Any(d => domena.EndsWith(d)))
+        {
+            return false;
+        }
+
+        return true;
+    }
+    static bool sprawdzNumerTelefonu(string telefon)
+    {
+        if (string.IsNullOrWhiteSpace(telefon))
+        {
+            return false;
+        }
+
+        if (telefon.Length < 7 || telefon.Length > 14)
+        {
+            return false;
+        }
+
+        foreach (char c in telefon)
+        {
+            if (!char.IsDigit(c))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
     static void EdytujKlienta()
     {
         PokazKlientow();
 
-        var index = GetClientIndex();
+        var index = IndeksKlienta();
 
         var imie = Prompt("imie: ");
         var email = Prompt("Email: ");
+        while (!sprawdzEmail(email))
+        {
+            Console.WriteLine("Nieprawidłowy adres e-mail. Spróbuj ponownie.");
+            email = Prompt("Email: ");
+        }
+
         var telefon = Prompt("telefon: ");
+        while (!sprawdzNumerTelefonu(telefon))
+        {
+            Console.WriteLine("Nieprawidłowy numer telefonu. Numer telefonu powinien składać się wyłącznie z cyfr i mieścić się w zakresie od 7 do 14 znaków. Spróbuj ponownie.");
+            telefon = Prompt("telefon: ");
+        }
 
         Console.WriteLine("edytuj samochod klienta");
         var marka = Prompt("marka: ");
         var model = Prompt("model: ");
-        var rokProdukcji = int.Parse(Prompt("rok produkcji: "));
+        var rokProdukcji = WyswietlRok("rok produkcji: ");
         var numerRejestracyjny = Prompt("numer rejestracyjny: ");
 
         var samochod = new Samochod(marka, model, rokProdukcji, numerRejestracyjny);
@@ -106,25 +180,44 @@ class Program
         Console.ReadKey();
     }
 
+
     static void UsunKlienta()
     {
         PokazKlientow();
 
-        var index = GetClientIndex();
+        var index = IndeksKlienta();
 
         klienci.RemoveAt(index);
 
         Console.WriteLine("usunieto\n");
         Console.ReadKey();
     }
+    static void Garaz()
+    {
+        Console.Clear();
+        Console.WriteLine("Dane samochodu:");
+        foreach (var klient in klienci)
+        {
+            var samochod = klient.Samochod;
+            Console.WriteLine($"Marka: {samochod.Marka}");
+            Console.WriteLine($"Model: {samochod.Model}");
+            Console.WriteLine($"Rok produkcji: {samochod.RokProdukcji}");
+            Console.WriteLine($"Numer rejestracyjny: {samochod.NumerRejestracyjny}");
+            Console.WriteLine();
+        }
 
+        Console.WriteLine("naciśnij Enter, aby wrócić do menu");
+        Console.ReadLine();
+    }
     static string Prompt(string message)
     {
         Console.Write(message);
         return Console.ReadLine();
     }
+    
 
-    static int PromptForYear(string message)
+
+    static int WyswietlRok(string message)
     {
         int year;
         string input;
@@ -141,7 +234,7 @@ class Program
         return year;
     }
 
-    static int GetClientIndex()
+    static int IndeksKlienta()
     {
         int index;
 
@@ -189,3 +282,4 @@ class Samochod
         NumerRejestracyjny = numerRejestracyjny;
     }
 }
+
