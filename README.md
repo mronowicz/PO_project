@@ -1,33 +1,34 @@
 Mechanik - System Zarządzania Klientami i Pracownikami
-Opis
+
+Opis:
 Program mechanik to prosty system do zarządzania klientami i pracownikami w warsztacie samochodowym. Umożliwia dodawanie, edytowanie, przeglądanie oraz usuwanie danych klientów oraz dodawanie pracowników do bazy danych.
 
-Funkcje
+Funkcje:
 Pokaz klientow
-
 Wyświetla listę wszystkich klientów w systemie wraz z informacjami o ich samochodach.
+
 Dodaj klienta
-
 Pozwala na dodanie nowego klienta do systemu, w tym informacji o imieniu, emailu, telefonie oraz szczegółów dotyczących ich samochodu.
+
 Edytuj klienta
-
 Umożliwia edycję danych istniejącego klienta, w tym informacji o imieniu, emailu, telefonie oraz szczegółów samochodu.
+
 Usun klienta
-
 Usuwa wybranego klienta z systemu.
+
 Garaz
-
 Wyświetla szczegóły dotyczące wszystkich samochodów klientów.
+
 Dodaj pracownika
-
 Pozwala na dodanie nowego pracownika (mechanika lub kierownika) do bazy danych.
+
 Pokaz pracownikow
-
 Wyświetla listę wszystkich pracowników w systemie.
-Wyjdz
 
+Wyjdz
 Zamyka program.
-Instrukcje użytkowania
+
+Instrukcje użytkowania:
 Po uruchomieniu programu wybierz odpowiednią opcję, wpisując numer lub literę wybranej funkcji.
 W przypadku dodawania lub edycji klienta, podawaj poprawne dane (np. email musi zawierać @ i należeć do jednej z dozwolonych domen).
 Numery klientów i pracowników wprowadzaj zgodnie z wyświetlanymi listami.
