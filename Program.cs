@@ -43,7 +43,7 @@ class Program
                 case "5":
                     Garaz();
                     break;
-                case "":
+                case "6":
                     DodajPracownika();
                     break;
 
