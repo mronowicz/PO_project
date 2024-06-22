@@ -183,13 +183,42 @@ class Program
 
     static void UsunKlienta()
     {
+        Console.Clear();
+        Console.WriteLine("Usuń klienta");
+
+        if (!klienci.Any())
+        {
+            Console.WriteLine("Brak klientów do usunięcia.");
+            Console.ReadKey();
+            return;
+        }
+
         PokazKlientow();
 
-        var index = IndeksKlienta();
+        int index;
+        do
+        {
+            Console.WriteLine("Podaj numer klienta do usunięcia (0 aby wrócić do menu): ");
+            var input = Console.ReadLine();
 
-        klienci.RemoveAt(index);
+            if (input == "0")
+            {
+                Console.WriteLine("Anulowano usuwanie klienta.");
+                Console.ReadKey();
+                return;
+            }
 
-        Console.WriteLine("usunieto\n");
+            if (!int.TryParse(input, out index) || index < 1 || index > klienci.Count)
+            {
+                Console.WriteLine("Zły numer, podaj numer z listy.");
+                index = -1;
+            }
+
+        } while (index == -1);
+
+        klienci.RemoveAt(index - 1);
+
+        Console.WriteLine("Usunięto klienta.");
         Console.ReadKey();
     }
     static void Garaz()
@@ -266,6 +295,8 @@ class Klient
         Samochod = samochod;
     }
 }
+
+
 
 class Samochod
 {
