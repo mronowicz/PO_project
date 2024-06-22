@@ -6,6 +6,7 @@ using System.Linq;
 class Program
 {
     static List<Klient> klienci = new List<Klient>();
+    static List<Pracownik> pracownicy = new List<Pracownik>();
 
 
     static void Main()
@@ -20,8 +21,9 @@ class Program
             Console.WriteLine("3. Edytuj klienta");
             Console.WriteLine("4. Usun klienta");
             Console.WriteLine("5. Garaz");
-            Console.WriteLine("6. Wyjdz");
-            
+            Console.WriteLine("6. Dodaj pracownika");
+            Console.WriteLine("7. Wyjdz");
+
 
             menu = Console.ReadLine();
             switch (menu)
@@ -41,9 +43,12 @@ class Program
                 case "5":
                     Garaz();
                     break;
+                case "":
+                    DodajPracownika();
+                    break;
 
             }
-        } while (menu != "6");
+        } while (menu != "7");
     }
 
     static void PokazKlientow()
@@ -243,7 +248,7 @@ class Program
         Console.Write(message);
         return Console.ReadLine();
     }
-    
+
 
 
     static int WyswietlRok(string message)
@@ -278,39 +283,102 @@ class Program
 
         return index - 1;
     }
-}
 
-class Klient
-{
-    public string Imie { get; set; }
-    public string Email { get; set; }
-    public string Telefon { get; set; }
-    public Samochod Samochod { get; set; }
-
-    public Klient(string imie, string email, string telefon, Samochod samochod)
+    static void DodajPracownika()
     {
-        Imie = imie;
-        Email = email;
-        Telefon = telefon;
-        Samochod = samochod;
+        Console.Clear();
+        Console.WriteLine("Wybierz rodzaj pracownika:");
+        Console.WriteLine("1. Mechanik");
+        Console.WriteLine("2. Kierownik");
+
+        string wybor = Console.ReadLine();
+        switch (wybor)
+        {
+            case "1":
+                DodajMechanika();
+                break;
+            case "2":
+                DodajKierownika();
+                break;
+            default:
+                Console.WriteLine("Nieprawidłowy wybór.");
+                break;
+        }
+
+        Console.WriteLine("Naciśnij Enter, aby wrócić do menu");
+        Console.ReadLine();
     }
-}
 
-
-
-class Samochod
-{
-    public string Marka { get; set; }
-    public string Model { get; set; }
-    public int RokProdukcji { get; set; }
-    public string NumerRejestracyjny { get; set; }
-
-    public Samochod(string marka, string model, int rokProdukcji, string numerRejestracyjny)
+    static void DodajMechanika()
     {
-        Marka = marka;
-        Model = model;
-        RokProdukcji = rokProdukcji;
-        NumerRejestracyjny = numerRejestracyjny;
+        var nazwisko = Prompt("Nazwisko mechanika: ");
+        pracownicy.Add(new Mechanik(nazwisko));
+        Console.WriteLine("Dodano mechanika.");
+    }
+
+    static void DodajKierownika()
+    {
+        var nazwisko = Prompt("Nazwisko kierownika: ");
+        pracownicy.Add(new Kierownik(nazwisko));
+        Console.WriteLine("Dodano kierownika.");
+    }
+
+
+    class Pracownik
+    {
+        public string Nazwisko { get; set; }
+
+        public Pracownik(string nazwisko)
+        {
+            Nazwisko = nazwisko;
+        }
+    }
+
+    class Mechanik : Pracownik
+    {
+        public Mechanik(string nazwisko) : base(nazwisko)
+        {
+        }
+    }
+
+    class Kierownik : Pracownik
+    {
+        public Kierownik(string nazwisko) : base(nazwisko)
+        {
+        }
+    }
+    class Klient
+    {
+        public string Imie { get; set; }
+        public string Email { get; set; }
+        public string Telefon { get; set; }
+        public Samochod Samochod { get; set; }
+
+        public Klient(string imie, string email, string telefon, Samochod samochod)
+        {
+            Imie = imie;
+            Email = email;
+            Telefon = telefon;
+            Samochod = samochod;
+        }
+    }
+
+
+
+    class Samochod
+    {
+        public string Marka { get; set; }
+        public string Model { get; set; }
+        public int RokProdukcji { get; set; }
+        public string NumerRejestracyjny { get; set; }
+
+        public Samochod(string marka, string model, int rokProdukcji, string numerRejestracyjny)
+        {
+            Marka = marka;
+            Model = model;
+            RokProdukcji = rokProdukcji;
+            NumerRejestracyjny = numerRejestracyjny;
+        }
     }
 }
 
