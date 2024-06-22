@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-
 class Program
 {
     static List<Klient> klienci = new List<Klient>();
     static List<Pracownik> pracownicy = new List<Pracownik>();
-
 
     static void Main()
     {
@@ -22,8 +20,8 @@ class Program
             Console.WriteLine("4. Usun klienta");
             Console.WriteLine("5. Garaz");
             Console.WriteLine("6. Dodaj pracownika");
-            Console.WriteLine("7. Wyjdz");
-
+            Console.WriteLine("7. Pokaz pracownikow");
+            Console.WriteLine("8. Wyjdz");
 
             menu = Console.ReadLine();
             switch (menu)
@@ -46,9 +44,11 @@ class Program
                 case "6":
                     DodajPracownika();
                     break;
-
+                case "7":
+                    PokazPracownikow();
+                    break;
             }
-        } while (menu != "7");
+        } while (menu != "8");
     }
 
     static void PokazKlientow()
@@ -104,6 +104,7 @@ class Program
         Console.WriteLine("dodano, nacisnij enter aby wrócic do menu\n");
         Console.ReadKey();
     }
+
     static bool sprawdzEmail(string email)
     {
         if (string.IsNullOrWhiteSpace(email))
@@ -126,6 +127,7 @@ class Program
 
         return true;
     }
+
     static bool sprawdzNumerTelefonu(string telefon)
     {
         if (string.IsNullOrWhiteSpace(telefon))
@@ -148,7 +150,6 @@ class Program
 
         return true;
     }
-
 
     static void EdytujKlienta()
     {
@@ -184,7 +185,6 @@ class Program
         Console.WriteLine("klient zaktualizowany \n");
         Console.ReadKey();
     }
-
 
     static void UsunKlienta()
     {
@@ -226,6 +226,7 @@ class Program
         Console.WriteLine("Usunięto klienta.");
         Console.ReadKey();
     }
+
     static void Garaz()
     {
         Console.Clear();
@@ -243,13 +244,32 @@ class Program
         Console.WriteLine("naciśnij Enter, aby wrócić do menu");
         Console.ReadLine();
     }
+
+    static void PokazPracownikow()
+    {
+        Console.Clear();
+        Console.WriteLine("Lista pracowników:");
+
+        if (!pracownicy.Any())
+        {
+            Console.WriteLine("Nie ma żadnych pracowników.");
+        }
+        else
+        {
+            foreach (var (pracownik, index) in pracownicy.Select((value, i) => (value, i)))
+            {
+                Console.WriteLine($"{index + 1}. {pracownik.Nazwisko} ({pracownik.GetType().Name})");
+            }
+        }
+
+        Console.ReadKey();
+    }
+
     static string Prompt(string message)
     {
         Console.Write(message);
         return Console.ReadLine();
     }
-
-
 
     static int WyswietlRok(string message)
     {
@@ -323,7 +343,6 @@ class Program
         Console.WriteLine("Dodano kierownika.");
     }
 
-
     class Pracownik
     {
         public string Nazwisko { get; set; }
@@ -347,6 +366,7 @@ class Program
         {
         }
     }
+
     class Klient
     {
         public string Imie { get; set; }
@@ -362,8 +382,6 @@ class Program
             Samochod = samochod;
         }
     }
-
-
 
     class Samochod
     {
@@ -381,4 +399,3 @@ class Program
         }
     }
 }
-
