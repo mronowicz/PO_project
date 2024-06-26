@@ -9,13 +9,18 @@ class Program
     static List<Pracownik> pracownicy = new List<Pracownik>();
     static string listaKlientowSciezka = "ListaKlientow.txt";
 
+
     static void Main()
     {
         if (!File.Exists(listaKlientowSciezka))
         {
             File.Create(listaKlientowSciezka).Close();
         }
-
+        string listaPracownikowSciezka = "ListaPracownikow.txt";
+        if (!File.Exists(listaPracownikowSciezka))
+        {
+            File.Create(listaPracownikowSciezka).Close();
+        }
         string menu;
         do
         {
@@ -288,6 +293,34 @@ class Program
         Console.Clear();
         Console.WriteLine("Lista pracowników:");
 
+        if (!File.Exists("ListaPracownikow.txt"))
+        {
+            Console.WriteLine("Brak pracowników.");
+            Console.ReadKey();
+            return;
+        }
+
+        pracownicy.Clear();
+
+        string[] lines = File.ReadAllLines("ListaPracownikow.txt");
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split(';');
+
+            string rodzaj = parts[0];
+            string nazwisko = parts[1];
+
+            if (rodzaj == "Mechanik")
+            {
+                pracownicy.Add(new Mechanik(nazwisko));
+            }
+            else if (rodzaj == "Kierownik")
+            {
+                pracownicy.Add(new Kierownik(nazwisko));
+            }
+        }
+
         if (!pracownicy.Any())
         {
             Console.WriteLine("Nie ma żadnych pracowników.");
@@ -302,6 +335,7 @@ class Program
 
         Console.ReadKey();
     }
+
 
     static string Prompt(string message)
     {
@@ -371,6 +405,12 @@ class Program
     {
         var nazwisko = Prompt("Nazwisko mechanika: ");
         pracownicy.Add(new Mechanik(nazwisko));
+
+        using (StreamWriter wpisz = File.AppendText("ListaPracownikow.txt"))
+        {
+            wpisz.WriteLine($"Mechanik;{nazwisko}");
+        }
+
         Console.WriteLine("Dodano mechanika.");
     }
 
@@ -378,8 +418,15 @@ class Program
     {
         var nazwisko = Prompt("Nazwisko kierownika: ");
         pracownicy.Add(new Kierownik(nazwisko));
+
+        using (StreamWriter wpisz = File.AppendText("ListaPracownikow.txt"))
+        {
+            wpisz.WriteLine($"Kierownik;{nazwisko}");
+        }
+
         Console.WriteLine("Dodano kierownika.");
     }
+
 
     class Pracownik
     {
