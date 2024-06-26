@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 class Program
 {
     static List<Klient> klienci = new List<Klient>();
     static List<Pracownik> pracownicy = new List<Pracownik>();
+    static string listaKlientowSciezka = "ListaKlientow.txt";
 
     static void Main()
     {
+        if (!File.Exists(listaKlientowSciezka))
+        {
+            File.Create(listaKlientowSciezka).Close();
+        }
+
         string menu;
         do
         {
@@ -56,6 +63,33 @@ class Program
         Console.Clear();
         Console.WriteLine("lista klientow:");
 
+        if (!File.Exists(listaKlientowSciezka))
+        {
+            Console.WriteLine("Plik ListaKlientow.txt nie istnieje.");
+            Console.ReadKey();
+            return;
+        }
+
+        klienci.Clear();
+
+        string[] lines = File.ReadAllLines(listaKlientowSciezka);
+
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split(';');
+
+            string imie = parts[0];
+            string email = parts[1];
+            string telefon = parts[2];
+            string marka = parts[3];
+            string model = parts[4];
+            int rokProdukcji = int.Parse(parts[5]);
+            string numerRejestracyjny = parts[6];
+
+            Samochod samochod = new Samochod(marka, model, rokProdukcji, numerRejestracyjny);
+            klienci.Add(new Klient(imie, email, telefon, samochod));
+        }
+
         if (!klienci.Any())
         {
             Console.WriteLine("nic tu nie ma");
@@ -99,12 +133,16 @@ class Program
 
         var samochod = new Samochod(marka, model, rokProdukcji, numerRejestracyjny);
 
+        using (StreamWriter wpisz = File.AppendText(listaKlientowSciezka))
+        {
+            wpisz.WriteLine($"{imie};{email};{telefon};{marka};{model};{rokProdukcji};{numerRejestracyjny}");
+        }
+
         klienci.Add(new Klient(imie, email, telefon, samochod));
 
         Console.WriteLine("dodano, nacisnij enter aby wrócic do menu\n");
         Console.ReadKey();
     }
-
     static bool sprawdzEmail(string email)
     {
         if (string.IsNullOrWhiteSpace(email))

@@ -1,0 +1,3 @@
+jan;janek@gmail.com;111111111;toyota;yaris;1999;sd232f
+jan;janek@gmail.com;111111111;toyota;yaris;1999;
+Artur;arturito@o2.pl;222222222;ford;kord;1998;sl332r
