@@ -1,3 +1,4 @@
 jan;janek@gmail.com;111111111;toyota;yaris;1999;sd232f
 jan;janek@gmail.com;111111111;toyota;yaris;1999;
 Artur;arturito@o2.pl;222222222;ford;kord;1998;sl332r
+kuba;kuba32@o2.pl;123456789;polo;market;1999;sdsr23

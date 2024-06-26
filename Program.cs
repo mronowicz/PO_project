@@ -327,14 +327,15 @@ class Program
         }
         else
         {
-            foreach (var (pracownik, index) in pracownicy.Select((value, i) => (value, i)))
+            foreach (var pracownik in pracownicy)
             {
-                Console.WriteLine($"{index + 1}. {pracownik.Nazwisko} ({pracownik.GetType().Name})");
+                Console.WriteLine($"{pracownicy.IndexOf(pracownik) + 1}. {pracownik.Nazwisko} ({pracownik.Rodzaj})");
             }
         }
 
         Console.ReadKey();
     }
+    
 
 
     static string Prompt(string message)
@@ -427,10 +428,16 @@ class Program
         Console.WriteLine("Dodano kierownika.");
     }
 
+    interface IPracownik
+    {
+        string Nazwisko { get; }
+        string Rodzaj { get; }
+    }
 
-    class Pracownik
+    abstract class Pracownik : IPracownik
     {
         public string Nazwisko { get; set; }
+        public abstract string Rodzaj { get; }
 
         public Pracownik(string nazwisko)
         {
@@ -440,6 +447,8 @@ class Program
 
     class Mechanik : Pracownik
     {
+        public override string Rodzaj => "Mechanik";
+
         public Mechanik(string nazwisko) : base(nazwisko)
         {
         }
@@ -447,10 +456,13 @@ class Program
 
     class Kierownik : Pracownik
     {
+        public override string Rodzaj => "Kierownik";
+
         public Kierownik(string nazwisko) : base(nazwisko)
         {
         }
     }
+
 
     class Klient
     {
