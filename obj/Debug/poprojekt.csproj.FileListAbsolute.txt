@@ -33,3 +33,10 @@ D:\programowanie\csharp\Projekt\obj\Debug\poprojekt.csproj.AssemblyReference.cac
 D:\programowanie\csharp\Projekt\obj\Debug\poprojekt.csproj.CoreCompileInputs.cache
 D:\programowanie\csharp\Projekt\obj\Debug\poprojekt.exe
 D:\programowanie\csharp\Projekt\obj\Debug\poprojekt.pdb
+D:\programowanie\csharp\PO_project\obj\Debug\poprojekt.csproj.AssemblyReference.cache
+D:\programowanie\csharp\PO_project\obj\Debug\poprojekt.csproj.CoreCompileInputs.cache
+D:\programowanie\csharp\PO_project\obj\Debug\poprojekt.exe
+D:\programowanie\csharp\PO_project\obj\Debug\poprojekt.pdb
+D:\programowanie\csharp\PO_project\bin\Debug\poprojekt.exe.config
+D:\programowanie\csharp\PO_project\bin\Debug\poprojekt.exe
+D:\programowanie\csharp\PO_project\bin\Debug\poprojekt.pdb

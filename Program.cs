@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
-class Program
+namespace PO_project 
+{ 
+public partial class Program
 {
     static List<Klient> klienci = new List<Klient>();
-    static List<Pracownik> pracownicy = new List<Pracownik>();
+    public static List<Pracownik> pracownicy = new List<Pracownik>();
     static string listaKlientowSciezka = "ListaKlientow.txt";
 
 
-    static void Main()
+    static void Main(string[] args)
     {
         if (!File.Exists(listaKlientowSciezka))
         {
@@ -54,7 +55,7 @@ class Program
                     Garaz();
                     break;
                 case "6":
-                    DodajPracownika();
+                    DodajPracownikaInnaNazwa();
                     break;
                 case "7":
                     PokazPracownikow();
@@ -288,54 +289,91 @@ class Program
         Console.ReadLine();
     }
 
-    static void PokazPracownikow()
-    {
-        Console.Clear();
-        Console.WriteLine("Lista pracowników:");
-
-        if (!File.Exists("ListaPracownikow.txt"))
+        static void PokazPracownikow()
         {
-            Console.WriteLine("Brak pracowników.");
+            Console.Clear();
+            Console.WriteLine("Lista pracowników:");
+
+            if (!File.Exists("ListaPracownikow.txt"))
+            {
+                Console.WriteLine("Brak pracowników.");
+                Console.ReadKey();
+                return;
+            }
+
+            pracownicy.Clear();
+
+            string[] lines = File.ReadAllLines("ListaPracownikow.txt");
+
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(';');
+
+                string rodzaj = parts[0];
+                string nazwisko = parts[1];
+
+                if (rodzaj == "Mechanik")
+                {
+                    pracownicy.Add(new Mechanik(nazwisko));
+                }
+                else if (rodzaj == "Kierownik")
+                {
+                    pracownicy.Add(new Kierownik(nazwisko));
+                }
+            }
+
+            if (!pracownicy.Any())
+            {
+                Console.WriteLine("Nie ma żadnych pracowników.");
+            }
+            else
+            {
+                foreach (var pracownik in pracownicy)
+                {
+                    Console.WriteLine($"{pracownicy.IndexOf(pracownik) + 1}. {pracownik.Nazwisko} ({pracownik.Rodzaj()})"); // Tutaj używamy metody Rodzaj() bez próby rzutowania na inny typ
+                }
+            }
+
             Console.ReadKey();
-            return;
         }
+        static void DodajPracownika()
+{
+    Console.Clear();
+    Console.WriteLine("Wybierz rodzaj pracownika:");
+    Console.WriteLine("1. Mechanik");
+    Console.WriteLine("2. Kierownik");
 
-        pracownicy.Clear();
-
-        string[] lines = File.ReadAllLines("ListaPracownikow.txt");
-
-        foreach (string line in lines)
-        {
-            string[] parts = line.Split(';');
-
-            string rodzaj = parts[0];
-            string nazwisko = parts[1];
-
-            if (rodzaj == "Mechanik")
-            {
-                pracownicy.Add(new Mechanik(nazwisko));
-            }
-            else if (rodzaj == "Kierownik")
-            {
-                pracownicy.Add(new Kierownik(nazwisko));
-            }
-        }
-
-        if (!pracownicy.Any())
-        {
-            Console.WriteLine("Nie ma żadnych pracowników.");
-        }
-        else
-        {
-            foreach (var pracownik in pracownicy)
-            {
-                Console.WriteLine($"{pracownicy.IndexOf(pracownik) + 1}. {pracownik.Nazwisko} ({pracownik.Rodzaj})");
-            }
-        }
-
-        Console.ReadKey();
+    string wybor = Console.ReadLine();
+    switch (wybor)
+    {
+        case "1":
+            DodajMechanika();
+            break;
+        case "2":
+            DodajKierownika();
+            break;
+        default:
+            Console.WriteLine("Nieprawidłowy wybór.");
+            break;
     }
-    
+
+    Console.WriteLine("Naciśnij Enter, aby wrócić do menu");
+    Console.ReadLine();
+}
+
+static void DodajMechanika()
+{
+    var nazwisko = Prompt("Nazwisko mechanika: ");
+    var mechanik = new Mechanik(nazwisko);
+    mechanik.DodajDoListy();
+}
+
+static void DodajKierownika()
+{
+    var nazwisko = Prompt("Nazwisko kierownika: ");
+    var kierownik = new Kierownik(nazwisko);
+    kierownik.DodajDoListy();
+}
 
 
     static string Prompt(string message)
@@ -376,123 +414,45 @@ class Program
 
         return index - 1;
     }
-
-    static void DodajPracownika()
-    {
-        Console.Clear();
-        Console.WriteLine("Wybierz rodzaj pracownika:");
-        Console.WriteLine("1. Mechanik");
-        Console.WriteLine("2. Kierownik");
-
-        string wybor = Console.ReadLine();
-        switch (wybor)
+        static void DodajPracownikaInnaNazwa()
         {
-            case "1":
-                DodajMechanika();
-                break;
-            case "2":
-                DodajKierownika();
-                break;
-            default:
-                Console.WriteLine("Nieprawidłowy wybór.");
-                break;
+            Console.Clear();
+            Console.WriteLine("Wybierz rodzaj pracownika:");
+            Console.WriteLine("1. Mechanik");
+            Console.WriteLine("2. Kierownik");
+
+            string wybor = Console.ReadLine();
+            switch (wybor)
+            {
+                case "1":
+                    DodajMechanikaDoListy(); // zmieniona nazwa na DodajMechanikaDoListy
+                    break;
+                case "2":
+                    DodajKierownikaDoListy(); // zmieniona nazwa na DodajKierownikaDoListy
+                    break;
+                default:
+                    Console.WriteLine("Nieprawidłowy wybór.");
+                    break;
+            }
+
+            Console.WriteLine("Naciśnij Enter, aby wrócić do menu");
+            Console.ReadLine();
         }
 
-        Console.WriteLine("Naciśnij Enter, aby wrócić do menu");
-        Console.ReadLine();
-    }
-
-    static void DodajMechanika()
-    {
-        var nazwisko = Prompt("Nazwisko mechanika: ");
-        pracownicy.Add(new Mechanik(nazwisko));
-
-        using (StreamWriter wpisz = File.AppendText("ListaPracownikow.txt"))
+        static void DodajMechanikaDoListy() // zmieniona nazwa na DodajMechanikaDoListy
         {
-            wpisz.WriteLine($"Mechanik;{nazwisko}");
+            var nazwisko = Prompt("Nazwisko mechanika: ");
+            var mechanik = new Mechanik(nazwisko);
+            mechanik.DodajDoListy();
         }
 
-        Console.WriteLine("Dodano mechanika.");
-    }
-
-    static void DodajKierownika()
-    {
-        var nazwisko = Prompt("Nazwisko kierownika: ");
-        pracownicy.Add(new Kierownik(nazwisko));
-
-        using (StreamWriter wpisz = File.AppendText("ListaPracownikow.txt"))
+        static void DodajKierownikaDoListy() // zmieniona nazwa na DodajKierownikaDoListy
         {
-            wpisz.WriteLine($"Kierownik;{nazwisko}");
+            var nazwisko = Prompt("Nazwisko kierownika: ");
+            var kierownik = new Kierownik(nazwisko);
+            kierownik.DodajDoListy();
         }
 
-        Console.WriteLine("Dodano kierownika.");
-    }
 
-    interface IPracownik
-    {
-        string Nazwisko { get; }
-        string Rodzaj { get; }
-    }
-
-    abstract class Pracownik : IPracownik
-    {
-        public string Nazwisko { get; set; }
-        public abstract string Rodzaj { get; }
-
-        public Pracownik(string nazwisko)
-        {
-            Nazwisko = nazwisko;
-        }
-    }
-
-    class Mechanik : Pracownik
-    {
-        public override string Rodzaj => "Mechanik";
-
-        public Mechanik(string nazwisko) : base(nazwisko)
-        {
-        }
-    }
-
-    class Kierownik : Pracownik
-    {
-        public override string Rodzaj => "Kierownik";
-
-        public Kierownik(string nazwisko) : base(nazwisko)
-        {
-        }
-    }
-
-
-    class Klient
-    {
-        public string Imie { get; set; }
-        public string Email { get; set; }
-        public string Telefon { get; set; }
-        public Samochod Samochod { get; set; }
-
-        public Klient(string imie, string email, string telefon, Samochod samochod)
-        {
-            Imie = imie;
-            Email = email;
-            Telefon = telefon;
-            Samochod = samochod;
-        }
-    }
-
-    class Samochod
-    {
-        public string Marka { get; set; }
-        public string Model { get; set; }
-        public int RokProdukcji { get; set; }
-        public string NumerRejestracyjny { get; set; }
-
-        public Samochod(string marka, string model, int rokProdukcji, string numerRejestracyjny)
-        {
-            Marka = marka;
-            Model = model;
-            RokProdukcji = rokProdukcji;
-            NumerRejestracyjny = numerRejestracyjny;
-        }
     }
 }
