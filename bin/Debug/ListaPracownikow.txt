@@ -2,3 +2,5 @@ Mechanik;jarek
 Kierownik;jadrula
 Mechanik;srubokret
 Kierownik;przykasie
+Mechanik;juras
+Kierownik;jurasowa
