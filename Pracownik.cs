@@ -9,6 +9,6 @@
             Nazwisko = nazwisko;
         }
 
-        public abstract string Rodzaj(); // Dodano abstrakcyjną metodę Rodzaj()
+        public abstract string Rodzaj();
     }
 }

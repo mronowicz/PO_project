@@ -334,7 +334,7 @@ namespace PO_project
             {
                 foreach (var pracownik in pracownicy)
                 {
-                    Console.WriteLine($"{pracownicy.IndexOf(pracownik) + 1}. {pracownik.Nazwisko} ({pracownik.Rodzaj()})"); // Tutaj używamy metody Rodzaj() bez próby rzutowania na inny typ
+                    Console.WriteLine($"{pracownicy.IndexOf(pracownik) + 1}. {pracownik.Nazwisko} ({pracownik.Rodzaj()})"); 
                 }
             }
 
@@ -372,7 +372,7 @@ namespace PO_project
             var nazwisko = Prompt("Nazwisko mechanika: ");
             var mechanik = new Mechanik(nazwisko);
             mechanik.DodajDoListy();
-            ZapiszPracownikowDoPliku(); // Zapisz pracowników do pliku po dodaniu
+            ZapiszPracownikowDoPliku(); 
         }
 
         static void DodajKierownikaDoListy()
@@ -380,7 +380,7 @@ namespace PO_project
             var nazwisko = Prompt("Nazwisko kierownika: ");
             var kierownik = new Kierownik(nazwisko);
             kierownik.DodajDoListy();
-            ZapiszPracownikowDoPliku(); // Zapisz pracowników do pliku po dodaniu
+            ZapiszPracownikowDoPliku(); 
         }
 
         static void ZapiszPracownikowDoPliku()
