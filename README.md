@@ -149,6 +149,14 @@ Klient ma atrybut Samochod.
 | + Mechanik(nazwisko) |  | + Kierownik(nazwisko) |
 +-----------------+       +-----------------+
 
+4. W podanym kodzie w języku C# wykorzystano następujące technologie i biblioteki:
+
+C#: Język programowania, w którym napisany jest cały kod. C# jest językiem programowania stworzonym przez Microsoft, który jest często używany do tworzenia aplikacji na platformę .NET.
+.NET Framework: Wykorzystano .NET Framework do tworzenia aplikacji desktopowych w Windows Forms. .NET Framework jest platformą programistyczną firmy Microsoft, która zapewnia wiele bibliotek i narzędzi do tworzenia aplikacji na platformę Windows.
+Windows Forms: Wykorzystano Windows Forms do tworzenia interfejsu użytkownika (GUI) w aplikacji desktopowej. Windows Forms jest technologią do tworzenia aplikacji desktopowych w systemie Windows, umożliwiającą tworzenie interfejsów użytkownika za pomocą formularzy i kontrolek.
+System.IO: Wykorzystano bibliotekę System.IO do operacji wejścia/wyjścia plików. Ta biblioteka umożliwia operacje związane z plikami, takie jak odczyt, zapis, tworzenie plików itp.
+System.Linq: Wykorzystano bibliotekę System.Linq do operacji na kolekcjach danych. Biblioteka ta zapewnia wiele metod rozszerzeń do operacji na kolekcjach, takich jak Select, Where, Any, itp.
+Windows Console: Początkowo kod był napisany w konsoli, ale w odpowiedzi na Twoje prośby, został przekształcony w interfejs użytkownika w Windows Forms.
 
 4. Instrukcje użytkowania:
 Po uruchomieniu programu wybierz odpowiednią opcję, wpisując numer lub literę wybranej funkcji.
