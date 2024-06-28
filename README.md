@@ -1,6 +1,6 @@
 Mechanik - System Zarządzania Klientami i Pracownikami
 
-Opis:
+1. Opis:
 Program mechanik to prosty system do zarządzania klientami i pracownikami w warsztacie samochodowym. Umożliwia dodawanie, edytowanie, przeglądanie oraz usuwanie danych klientów oraz dodawanie pracowników do bazy danych.
 
 Funkcje:
@@ -28,12 +28,134 @@ Wyświetla listę wszystkich pracowników w systemie.
 Wyjdz
 Zamyka program.
 
-Instrukcje użytkowania:
+2. Klasy i atrybuty
+Program
+
+Atrybuty:
+klienci : List<Klient>
+pracownicy : List<Pracownik>
+listaKlientowSciezka : string
+listaPracownikowSciezka : string
+Metody:
+Main(args : string[])
+PokazKlientow()
+DodajKlienta()
+EdytujKlienta()
+UsunKlienta()
+Garaz()
+PokazPracownikow()
+DodajPracownikaInnaNazwa()
+DodajMechanikaDoListy()
+DodajKierownikaDoListy()
+ZapiszPracownikowDoPliku()
+Prompt(message : string) : string
+WyswietlRok(message : string) : int
+IndeksKlienta() : int
+sprawdzEmail(email : string) : bool
+sprawdzNumerTelefonu(telefon : string) : bool
+Klient
+
+Atrybuty:
+Imie : string
+Email : string
+Telefon : string
+Samochod : Samochod
+Metody:
+Konstruktor Klient(imie : string, email : string, telefon : string, samochod : Samochod)
+Samochod
+
+Atrybuty:
+Marka : string
+Model : string
+RokProdukcji : int
+NumerRejestracyjny : string
+Metody:
+Konstruktor Samochod(marka : string, model : string, rokProdukcji : int, numerRejestracyjny : string)
+Pracownik
+
+Atrybuty:
+Nazwisko : string
+Metody:
+Rodzaj() : string
+DodajDoListy()
+Mechanik (dziedziczy po Pracownik)
+
+Metody:
+Konstruktor Mechanik(nazwisko : string)
+Kierownik (dziedziczy po Pracownik)
+
+Metody:
+Konstruktor Kierownik(nazwisko : string)
+Relacje
+Dziedziczenie:
+Mechanik i Kierownik dziedziczą po Pracownik.
+Agregacja:
+Program zawiera listy klienci i pracownicy.
+Klient ma atrybut Samochod.
+
+3. Diagram UML
+
++-----------------+
+|    Program      |
++-----------------+
+| - klienci       |
+| - pracownicy    |
+| - listaKlientowSciezka |
+| - listaPracownikowSciezka |
++-----------------+
+| + Main()        |
+| + PokazKlientow()|
+| + DodajKlienta() |
+| + EdytujKlienta()|
+| + UsunKlienta()  |
+| + Garaz()        |
+| + PokazPracownikow() |
+| + DodajPracownikaInnaNazwa() |
+| + DodajMechanikaDoListy() |
+| + DodajKierownikaDoListy() |
+| + ZapiszPracownikowDoPliku() |
+| + Prompt(message : string) : string |
+| + WyswietlRok(message : string) : int |
+| + IndeksKlienta() : int |
+| + sprawdzEmail(email : string) : bool |
+| + sprawdzNumerTelefonu(telefon : string) : bool |
++-----------------+
+
++-----------------+     +-------------+
+|     Klient      |<----|   Samochod  |
++-----------------+     +-------------+
+| - Imie          |     | - Marka     |
+| - Email         |     | - Model     |
+| - Telefon       |     | - RokProdukcji |
+| - Samochod      |     | - NumerRejestracyjny |
++-----------------+     +-------------+
+| + Klient(imie, email, telefon, samochod) |
++-----------------+     | + Samochod(marka, model, rokProdukcji, numerRejestracyjny) |
+                        +-------------+
+
++-----------------+
+|   Pracownik     |
++-----------------+
+| - Nazwisko      |
++-----------------+
+| + Rodzaj() : string |
+| + DodajDoListy() |
++-----------------+
+        ^
+        |
++-----------------+       +-----------------+
+|    Mechanik     |       |    Kierownik    |
++-----------------+       +-----------------+
+| + Mechanik(nazwisko) |  | + Kierownik(nazwisko) |
++-----------------+       +-----------------+
+
+
+4. Instrukcje użytkowania:
 Po uruchomieniu programu wybierz odpowiednią opcję, wpisując numer lub literę wybranej funkcji.
 W przypadku dodawania lub edycji klienta, podawaj poprawne dane (np. email musi zawierać @ i należeć do jednej z dozwolonych domen).
 Numery klientów i pracowników wprowadzaj zgodnie z wyświetlanymi listami.
 
-Autorzy
+5. Autorzy
 Program stworzony przez Marcin Ronowicz oraz Krzysztof Paździór.
 
 Wymagania
