@@ -40,3 +40,10 @@ D:\programowanie\csharp\PO_project\obj\Debug\poprojekt.pdb
 D:\programowanie\csharp\PO_project\bin\Debug\poprojekt.exe.config
 D:\programowanie\csharp\PO_project\bin\Debug\poprojekt.exe
 D:\programowanie\csharp\PO_project\bin\Debug\poprojekt.pdb
+C:\Users\Student\Source\Repos\projekt\bin\Debug\poprojekt.exe.config
+C:\Users\Student\Source\Repos\projekt\bin\Debug\poprojekt.exe
+C:\Users\Student\Source\Repos\projekt\bin\Debug\poprojekt.pdb
+C:\Users\Student\Source\Repos\projekt\obj\Debug\poprojekt.csproj.AssemblyReference.cache
+C:\Users\Student\Source\Repos\projekt\obj\Debug\poprojekt.csproj.CoreCompileInputs.cache
+C:\Users\Student\Source\Repos\projekt\obj\Debug\poprojekt.exe
+C:\Users\Student\Source\Repos\projekt\obj\Debug\poprojekt.pdb

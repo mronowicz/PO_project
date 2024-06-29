@@ -1,7 +1,11 @@
-﻿using PO_project;
-
-interface IPracownik
+﻿namespace PO_project
 {
-    string Nazwisko { get; }
-    string Rodzaj { get; }
+
+
+
+    interface IPracownik
+    {
+        string Nazwisko { get; }
+        string Rodzaj { get; }
+    }
 }

@@ -1,17 +1,21 @@
-﻿using PO_project; 
-
-class Klient
+﻿namespace PO_project
 {
-    public string Imie { get; set; }
-    public string Email { get; set; }
-    public string Telefon { get; set; }
-    public Samochod Samochod { get; set; }
 
-    public Klient(string imie, string email, string telefon, Samochod samochod)
+
+
+    class Klient
     {
-        Imie = imie;
-        Email = email;
-        Telefon = telefon;
-        Samochod = samochod;
+        public string Imie { get; set; }
+        public string Email { get; set; }
+        public string Telefon { get; set; }
+        public Samochod Samochod { get; set; }
+
+        public Klient(string imie, string email, string telefon, Samochod samochod)
+        {
+            Imie = imie;
+            Email = email;
+            Telefon = telefon;
+            Samochod = samochod;
+        }
     }
 }
