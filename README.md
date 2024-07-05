@@ -187,6 +187,7 @@ Plik: Samochod.cs
 
 public class Samochod
 {
+
     private string marka;
     private string model;
     private int rokProdukcji;
@@ -221,13 +222,17 @@ csharp
 Skopiuj kod
 public virtual void WykonajPrace()
 {
+
     Console.WriteLine("Pracownik wykonuje pracę.");
+    
 }
 Plik: Kierownik.cs
 
 public override void WykonajPrace()
 {
+
     Console.WriteLine("Kierownik zarządza pracą.");
+    
 }
 W powyższym przykładzie metoda WykonajPrace jest zdefiniowana w klasie bazowej Pracownik, a następnie jest nadpisana w klasie Kierownik.
 
@@ -239,12 +244,14 @@ Plik: IPracownik.cs
 
 public interface IPracownik
 {
+
     void WykonajPrace();
 }
 Plik: Pracownik.cs
 
 public class Pracownik : IPracownik
 {
+
     public virtual void WykonajPrace()
     {
         Console.WriteLine("Pracownik wykonuje pracę.");
@@ -260,6 +267,7 @@ Plik: Pracownik.cs
 
 public class Pracownik
 {
+
     public string Imie { get; set; }
     public string Nazwisko { get; set; }
     public string Stanowisko { get; set; }
@@ -274,6 +282,7 @@ Plik: Kierownik.cs
 
 public class Kierownik : Pracownik
 {
+
     public override void WykonajPrace()
     {
         Console.WriteLine("Kierownik zarządza pracą.");
